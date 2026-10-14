@@ -41,7 +41,7 @@ export interface FilingDate {
   what: string
 }
 
-const email = 'aasaadesokan396@yahoo.com'
+const email = 'adesokan396@yahoo.com'
 
 export const company = {
   name: 'ESAMI',
