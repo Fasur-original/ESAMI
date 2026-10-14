@@ -1,4 +1,4 @@
-import { Outlet, ScrollRestoration } from 'react-router'
+import { Outlet } from 'react-router'
 import { ConsultationProvider } from '../../context/ConsultationProvider'
 import { ConsultationDialog } from '../consultation/ConsultationDialog'
 import { SiteFooter } from './SiteFooter'
@@ -19,7 +19,6 @@ export function RootLayout() {
       </main>
       <SiteFooter />
       <ConsultationDialog />
-      <ScrollRestoration />
     </ConsultationProvider>
   )
 }

@@ -36,6 +36,19 @@ The server listens on Render's `PORT`, caches hashed files in `/assets` for a
 year, compresses text responses, sends security headers, and returns
 `index.html` for client-side routes.
 
+## SEO
+
+`pnpm build` prerenders the app into `dist/index.html` (and `dist/404.html`) so
+crawlers and link previews see the full page without running JavaScript. The
+same step adds the title, description, canonical URL, Open Graph/Twitter tags,
+schema.org `AccountingService` data, `robots.txt` and `sitemap.xml`.
+
+- **Site address:** set `SITE_URL` (already in `render.yaml`) to the live URL, or
+  change `seo.defaultSiteUrl` in `src/content/site.ts`. Redeploy after changing it.
+- **Titles and descriptions:** `seo` in `src/content/site.ts`.
+- **Icons and share image:** `node scripts/generate-brand-assets.mjs` regenerates
+  `public/` icons and `og-image.png` from the logo component (needs Edge). Commit the output.
+
 ## Contact forms
 
 "Book a consultation" and the Contact section build a `mailto:` link, so the

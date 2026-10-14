@@ -29,8 +29,10 @@ const springRise = { type: 'spring', stiffness: 140, damping: 18 } as const
 
 export function EsamiMark({ tone = 'brand', animated = false, className, title = 'ESAMI' }: EsamiMarkProps) {
   const uid = useId().replace(/:/g, '')
+  // The starting pose must be identical in prerendered HTML and in the browser, so it
+  // depends only on `animated`. Reduced motion just makes the move instant.
   const reduceMotion = useReducedMotion()
-  const play = animated && !reduceMotion
+  const instant = { duration: 0 } as const
 
   const eFill = tone === 'onDark' ? `url(#${uid}-e-light)` : `url(#${uid}-e-navy)`
 
@@ -71,9 +73,9 @@ export function EsamiMark({ tone = 'brand', animated = false, className, title =
           d={d}
           fill={`url(#${uid}-bars)`}
           style={{ transformBox: 'fill-box', transformOrigin: '50% 100%' }}
-          initial={play ? { scaleY: 0, opacity: 0 } : false}
+          initial={animated ? { scaleY: 0, opacity: 0 } : false}
           animate={{ scaleY: 1, opacity: 1 }}
-          transition={{ ...springRise, delay: 0.25 + i * 0.14 }}
+          transition={reduceMotion ? instant : { ...springRise, delay: 0.25 + i * 0.14 }}
         />
       ))}
 
@@ -81,9 +83,9 @@ export function EsamiMark({ tone = 'brand', animated = false, className, title =
         d={TICK}
         fill={`url(#${uid}-tick)`}
         style={{ transformBox: 'fill-box', transformOrigin: '20% 90%' }}
-        initial={play ? { opacity: 0, scale: 0.6, x: -40 } : false}
+        initial={animated ? { opacity: 0, scale: 0.6, x: -40 } : false}
         animate={{ opacity: 1, scale: 1, x: 0 }}
-        transition={{ type: 'spring', stiffness: 170, damping: 16, delay: 0.85 }}
+        transition={reduceMotion ? instant : { type: 'spring', stiffness: 170, damping: 16, delay: 0.85 }}
       />
     </svg>
   )

@@ -1,0 +1,21 @@
+{
+  "name": "ESAMI Audit & Professional Services",
+  "short_name": "ESAMI",
+  "description": "Lagos accounting and advisory firm for Nigerian businesses, NGOs and public bodies: bookkeeping, financial statements, tax compliance, payroll, internal audit and NGO accounting.",
+  "start_url": "/",
+  "display": "browser",
+  "background_color": "#051826",
+  "theme_color": "#051826",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

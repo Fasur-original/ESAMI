@@ -12,3 +12,7 @@ services:
     envVars:
       - key: NODE_VERSION
         value: 22.17.0
+      # Public address used for canonical URLs, the sitemap and social previews.
+      # Change it when a custom domain is connected, then redeploy.
+      - key: SITE_URL
+        value: https://esami-website.onrender.com

@@ -50,7 +50,24 @@ export const company = {
   founded: 2026,
   city: 'Lagos',
   country: 'Nigeria',
+  countryCode: 'NG',
   email,
+} as const
+
+export const seo = {
+  /**
+   * Public address of the site. The build reads SITE_URL first, so set that env var
+   * on Render (or change this default) when a custom domain is connected.
+   */
+  defaultSiteUrl: 'https://esami-website.onrender.com',
+  title: 'ESAMI Audit & Professional Services | Accounting, Tax and Advisory Firm in Lagos',
+  description:
+    'Lagos accounting and advisory firm for Nigerian businesses, NGOs and public bodies: bookkeeping, financial statements, tax compliance, payroll, internal audit and NGO accounting.',
+  shareTitle: 'ESAMI Audit & Professional Services',
+  shareDescription:
+    'Accounts that hold up when someone asks for them. Accounting, tax and advisory for Nigerian businesses, NGOs and public bodies.',
+  notFoundTitle: 'Page not found | ESAMI Audit & Professional Services',
+  locale: 'en_NG',
 } as const
 
 export const navItems: NavItem[] = [
@@ -198,13 +215,13 @@ export const team = {
       name: 'James Adesokan Aasa',
       role: 'Managing Partner and Chief Executive',
       photo: jamesPhoto,
-      bio: 'James has more than 17 years of audit and assurance experience: eight years as an Audit Senior Manager and over nine at Associate Director level.',
+      bio: 'James has more than 17 years of audit and assurance experience, built at Deloitte Nigeria, where he rose from Audit Senior Manager to Associate Director.',
     },
     {
       name: 'Simeon Olusegun Ogunwuyi',
       role: 'Associate Partner',
       photo: simeonPhoto,
-      bio: 'Simeon has more than 18 years of accounting experience, including 17 years heading financial reporting in the insurance sector, where he has led both financial reporting and general accounts. He holds an HND and the FCA, ACTI and ANIM designations.',
+      bio: 'Simeon has more than 18 years of accounting experience. He has headed financial reporting at Law Union & Rock Insurance Plc and Goldlink Insurance Plc, where he also led general accounts, after starting his career as an accountant at Manuchar. He holds an HND and the FCA, ACTI and ANIM designations.',
     },
   ] satisfies TeamMember[],
 }

@@ -23,4 +23,4 @@ dist-ssr
 *.sln
 *.sw?
 screenshots/*
-web_design_references/*
+web_design_references/*dist-server

@@ -1,6 +1,6 @@
 // Production server for Render (or any Node host). Serves the Vite build in ./dist
-// with long-lived caching for hashed assets, compression, security headers and an
-// SPA fallback so client-side routes resolve to index.html. No dependencies.
+// with long-lived caching for hashed assets, compression and security headers.
+// Unknown routes get the prerendered 404.html with a 404 status. No dependencies.
 import { createReadStream } from 'node:fs'
 import { stat } from 'node:fs/promises'
 import { createServer } from 'node:http'
@@ -125,18 +125,19 @@ const server = createServer(async (req, res) => {
   const file = await resolveFile(pathname)
   if (file) return send(req, res, 200, file, pathname)
 
-  // Missing files with an extension (e.g. /assets/old-hash.js) are real 404s;
-  // anything else is a client-side route and gets the app shell.
+  // Missing files with an extension (e.g. /assets/old-hash.js) get a plain 404.
   if (extname(pathname)) {
     res.writeHead(404, { 'Content-Type': 'text/plain; charset=utf-8', ...SECURITY_HEADERS }).end('Not found')
     return
   }
-  const shell = await resolveFile('/index.html')
-  if (!shell) {
+  // Any other unknown path gets the prerendered "page not found" page with a real 404
+  // status (not a soft 404), which the app then hydrates.
+  const notFound = (await resolveFile('/404.html')) ?? (await resolveFile('/index.html'))
+  if (!notFound) {
     res.writeHead(500, { 'Content-Type': 'text/plain; charset=utf-8' }).end('Build missing: run the build first.')
     return
   }
-  send(req, res, 200, shell, '/index.html')
+  send(req, res, 404, notFound, '/404.html')
 })
 
 server.listen(PORT, HOST, () => {
